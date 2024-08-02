@@ -1,10 +1,15 @@
 import { Component } from "react";
+import Header from "./Header";
+import Description from "./Description";
 
 class Hello extends Component{
     render(){
         return(
             <div>
-              <p>I'm good</p>
+              <Header  
+              name ={this.props.name}/>
+              <Description
+              name={this.props.name} />
             </div>
         )
     }

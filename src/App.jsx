@@ -12,11 +12,13 @@ import Hello from "./component/Hello";
 class App extends Component{
     render()
     {
+        const name =["niki","vijay","Ajith"]
         return(
             <div>
-                <Header/>
-                <Description />
-                <Hello />
+                <Hello 
+                name={name[0]} />
+                <Hello 
+                name ={name[1]}/>
                 
             </div>
         )
