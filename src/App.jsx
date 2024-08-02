@@ -1,28 +1,27 @@
-import Note from "./component/note";
+////class component (stateful component)
 
 
-function App({notes}) {
-   
-    
-  return (
-    <div>
-        <h1>Names</h1>
-        <ul>
-            {
-               notes.map(note=>{
-                return <Note 
-                     note={note} 
-                     key={note.id}
-                     />
-               })
-            }
-        </ul>
-        </div>)
+/*import { Component } from "react";
 
-    
+class App extends Component{
+    render()
+    {
+        return(
+            <div>
+                <h1>hello</h1>
+            </div>
+        )
+    }
+}*/
 
-    
+//function component (stateless component)
 
+function App(){
+    return (
+        <div>
+            <h1>hello Niki</h1>
+        </div>
+    )
 }
 
 export default App;
