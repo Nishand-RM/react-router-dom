@@ -9,31 +9,45 @@ class App extends Component{
 
         //initialize a state
         this.state = {
-            name:'niki',
-            age:23
+            count:0
         }
 
     }
 
- clickme = ()=>{
-    /*should not mutate the state directly
-    this.state.name = "vishnu";
-    this.state.age = 24;*/
-    
-    //instead we have to use setState(): which helps in update the state along with our given sate.
+ //increment
+    clickme = ()=>{
+   
     this.setState({
-        name:"vishnu",
-        age:24
+       count:this.state.count + 1
     });
 
+ }
+
+ //decrement
+ dec =()=>{
+    this.setState({
+        count:this.state.count - 1
+    });
+    
+ }
+
+ //reset
+ reset_state =()=>{
+    this.setState({
+        count:0
+    });
  }
     render(){
           return(
             <div className="box">
-            <h1>Hello {this.state.name}  !</h1>
-            <h2>what is your age: {this.state.age}</h2>
+            <h1>Counter: {this.state.count}  !</h1>
             
-            <button type="button" class="btn btn-primary" onClick={this.clickme}>Change</button>
+            
+            <button type="button" class="btn btn-primary" onClick={this.clickme}>Increment</button>
+            <button type="button"  class="btn btn-secondary"onClick={this.dec}>Decrement</button>
+            <button type="button" class="btn btn-success" onClick={this.reset_state}>Reset</button>
+
+
             </div>
           )
           }
