@@ -1,56 +1,24 @@
-import {Component } from "react";
-import './App.css'
+import { useState } from "react";
 
-class App extends Component{
+//Function component
 
-    constructor(){
-        //calling parent class constructor(component)
-        super();
+const App = ()=>{
 
-        //initialize a state
-        this.state = {
-            count:0
-        }
-
-    }
-
- //increment
-    clickme = ()=>{
-   
-    this.setState({
-       count:this.state.count + 1
-    });
-
- }
-
- //decrement
- dec =()=>{
-    this.setState({
-        count:this.state.count - 1
-    });
+//here useState returns 2 value i)name(name) ii)function(setName) created a destrucurring array and stored the useState return value in it.
     
- }
+const [name,setName] = useState("Niki");
 
- //reset
- reset_state =()=>{
-    this.setState({
-        count:0
-    });
- }
-    render(){
-          return(
-            <div className="box">
-            <h1>Counter: {this.state.count}  !</h1>
-            
-            
-            <button type="button" class="btn btn-primary" onClick={this.clickme}>Increment</button>
-            <button type="button"  class="btn btn-secondary"onClick={this.dec}>Decrement</button>
-            <button type="button" class="btn btn-success" onClick={this.reset_state}>Reset</button>
+function clickme(){
+    setName('Vijay')
+}
 
+    return(
+        <div>
+            <h1>Hello {name}</h1>
+            <button type="button" class="btn btn-primary" onClick={clickme}>ChangeName</button>
 
-            </div>
-          )
-          }
+        </div>
+    )
 }
 
 export default App;
