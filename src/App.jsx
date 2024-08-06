@@ -1,15 +1,32 @@
-import { useState } from "react"
-import Status from "./components/Status.jsx";
+import { useEffect, useState } from "react"
 
 
 const App = ()=>{
-    let [user,setUser] = useState("krish");
+    let [count,setcount] = useState(0);
+
+
+//this run when component is mounted
+    useEffect(()=>{
+        console.log(`component is mounted`);
+    },[]);
+
+//this runs component is updated
+
+    useEffect(()=>{
+        console.log(`componet is updated ${count}`)
+    },[count]);
+
+    //method
+
+    function click(){
+        setcount(count + 1);
+    }
+
 
     return(
         <div>
-            <Status 
-            user ={user}
-            setUser ={setUser} />
+           <h1>counter:{count}</h1>
+           <button onClick={click}>INC</button>
         </div>
     )
 }
