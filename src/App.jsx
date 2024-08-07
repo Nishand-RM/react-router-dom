@@ -14,7 +14,7 @@ const App = ()=>{
 
     useEffect(()=>{
         console.log(`componet is updated ${count}`)
-    },[count]);
+    },[count] );
 
     //method
 
