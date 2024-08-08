@@ -1,34 +1,33 @@
-import { useEffect, useState } from "react"
+import React from 'react'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Home from './components/Home'
+import Notes from './components/Notes'
+import About from './components/About'
 
+//create a router
 
-const App = ()=>{
-    let [count,setcount] = useState(0);
+const router =createBrowserRouter([
+  {
+    path: '/',
+    element:<Home />
+  },
+  {
+    path:'/notes',
+    element:<Notes />
+  },
+  {
+      path:'/about',
+      element:<About />
+    
+  }
 
+])
 
-//this run when component is mounted
-    useEffect(()=>{
-        console.log(`component is mounted`);
-    },[]);
-
-//this runs component is updated
-
-    useEffect(()=>{
-        console.log(`componet is updated ${count}`)
-    },[count] );
-
-    //method
-
-    function click(){
-        setcount(count + 1);
-    }
-
-
-    return(
-        <div>
-           <h1>counter:{count}</h1>
-           <button onClick={click}>INC</button>
-        </div>
-    )
+const App = () => {
+  return <div>
+    <RouterProvider  router={router}/>
+    </div>
+  
 }
 
-export default App
+export default App;
