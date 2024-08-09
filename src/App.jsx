@@ -1,33 +1,20 @@
 import React from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Home from './components/Home'
-import Notes from './components/Notes'
-import About from './components/About'
+import Web from './components/Web';
+import './components/Card_fun.css'
 
-//create a router
 
-const router =createBrowserRouter([
-  {
-    path: '/',
-    element:<Home />
-  },
-  {
-    path:'/notes',
-    element:<Notes />
-  },
-  {
-      path:'/about',
-      element:<About />
-    
-  }
 
-])
+function App() {
 
-const App = () => {
-  return <div>
-    <RouterProvider  router={router}/>
+ 
+
+  return (
+    <div className='mainbox'>
+      <Web />
+      
     </div>
-  
+
+  )
 }
 
 export default App;
