@@ -1,18 +1,15 @@
+// src/App.jsx
 import React from 'react';
-import { Provider } from 'react-redux';
-import store from './store/cartSlice';  
-import ProductList from './components/ProductList';
-import CartItem from './components/CartItem';
+import BookList from './components/BookList';
+import AuthorList from './components/AuthorList';
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <div className="App">
-        <h1>Shopping Cart</h1>
-        <ProductList />
-        <CartItem />
-      </div>
-    </Provider>
+    <div>
+      <h1>Library Management Dashboard</h1>
+      <BookList />
+      <AuthorList />
+    </div>
   );
 };
 
