@@ -1,63 +1,57 @@
-import React, { Component } from 'react';
-import ProductList from './components/ProductList';
-import Cart from './components/Cart';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import UserList from './components/UserList';
+import UserForm from './components/UserForm';
 
-const products = [
-  { id: 1, name: 'Product 1', description: 'Popular Item', price: '$20', image: 'https://via.placeholder.com/150',category: 'Popular', rating: 4  },
-  { id: 2, name: 'Product 2', description: 'Special Item', price: '$30', image: 'https://via.placeholder.com/150' },
-  { id: 3, name: 'Product 3', description: 'Popular Item', price: '$25', image: 'https://via.placeholder.com/150',category: 'Popular', rating: 3  },
-  { id: 4, name: 'Product 4', description: 'Special Item', price: '$40', image: 'https://via.placeholder.com/150' },
-  { id: 5, name: 'Product 5', description: 'Popular Item', price: '$15', image: 'https://via.placeholder.com/150',category: 'Popular', rating: 4  },
-  { id: 6, name: 'Product 6', description: 'Special Item', price: '$35', image: 'https://via.placeholder.com/150' },
-  { id: 7, name: 'Product 7', description: 'Popular Item', price: '$50', image: 'https://via.placeholder.com/150' ,category: 'Popular', rating: 5 },
-  { id: 8, name: 'Product 8', description: 'Special Item', price: '$45', image: 'https://via.placeholder.com/150' },
-  
+const API_URL = 'https://jsonplaceholder.typicode.com/users';
 
-];
+function App() {
+  const [users, setUsers] = useState([]);
+  const [editingUser, setEditingUser] = useState(null);
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      cartItems: [],
-    };
-  }
+  useEffect(() => {
+    axios.get(API_URL)
+      .then(response => setUsers(response.data))
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
 
-  addToCart = (product) => {
-    this.setState(prevState => ({
-      cartItems: [...prevState.cartItems, product]
-    }));
+  const addUser = (user) => {
+    axios.post(API_URL, user)
+      .then(response => setUsers([...users, response.data]))
+      .catch(error => console.error('Error adding user:', error));
   };
 
-  removeFromCart = (product) => {
-    this.setState(prevState => ({
-      cartItems: prevState.cartItems.filter(item => item.id !== product.id)
-    }));
+  const updateUser = (user) => {
+    axios.put(`${API_URL}/${user.id}`, user)
+      .then(response => {
+        setUsers(users.map(u => (u.id === user.id ? response.data : u)));
+        setEditingUser(null);
+      })
+      .catch(error => console.error('Error updating user:', error));
   };
 
-  render() {
-    const cartItemCount = this.state.cartItems.length;
+  const deleteUser = (id) => {
+    axios.delete(`${API_URL}/${id}`)
+      .then(() => setUsers(users.filter(user => user.id !== id)))
+      .catch(error => console.error('Error deleting user:', error));
+  };
 
-    return (
-      <div>
-        <header className="header">
-          <h1>Shop in Style</h1>
-          <p>With this shop homepage template</p>
-          <Cart cartItemCount={cartItemCount} />
-        </header>
-        <main>
-          <ProductList
-            products={products}
-            onAdd={this.addToCart}
-            onRemove={this.removeFromCart}
-            cartItems={this.state.cartItems}
-          />
-        </main>
-      </div>
-    );
-  }
+  return (
+    <div className="app">
+      <h1>User Management</h1>
+      <UserForm 
+        onAddUser={addUser} 
+        onUpdateUser={updateUser} 
+        user={editingUser} 
+        setEditingUser={setEditingUser}
+      />
+      <UserList 
+        users={users} 
+        onEditUser={setEditingUser} 
+        onDeleteUser={deleteUser}
+      />
+    </div>
+  );
 }
 
 export default App;
